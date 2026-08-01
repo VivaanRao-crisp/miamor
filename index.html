@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Memory Album 🐼 — Every Stupid Beautiful Thing</title>
+  <meta name="description" content="A goofy, lovey, chaotic little album of every dumb beautiful moment we've shared." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Dancing+Script:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TERMINAL GATE -->
+  <div id="terminal-overlay" role="main" aria-label="Authentication terminal">
+    <input type="password" id="term-hidden-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-label="Enter passphrase" />
+    <div class="crt-scanlines" aria-hidden="true"></div>
+    <div class="crt-vignette"  aria-hidden="true"></div>
+    <div id="terminal-screen">
+      <div id="terminal-output"></div>
+      <div id="terminal-input-line">
+        <span class="term-prompt">passphrase<span class="term-prompt-colon">:</span>&nbsp;</span>
+        <span id="term-display"></span><span class="term-cursor" id="term-cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN SITE -->
+  <div id="main-site">
+
+    <div id="petals-container" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <header class="hero" id="hero">
+      <div class="hero__sparkles" aria-hidden="true">
+        <span class="sparkle s1">✦</span>
+        <span class="sparkle s2">✦</span>
+        <span class="sparkle s3">✦</span>
+        <span class="sparkle s4">✦</span>
+        <span class="sparkle s5">✦</span>
+        <span class="sparkle s6">✦</span>
+      </div>
+      <div class="hero__panda-deco" aria-hidden="true">
+        <span class="deco-panda dp1">🐼</span>
+        <span class="deco-panda dp2">🐼</span>
+        <span class="deco-panda dp3">🌸</span>
+        <span class="deco-panda dp4">🌿</span>
+      </div>
+      <div class="hero__inner">
+        <p class="hero__eyebrow">for my favourite person on earth 🐾</p>
+        <h1 class="hero__title">Our Memory Album</h1>
+        <p class="hero__subtitle">
+          every dumb, beautiful, chaotic, perfect moment —<br />
+          documented because we deserve to relive all of it 🥹
+        </p>
+        <div class="hero__vibes" aria-hidden="true">
+          <span class="vibe-pill">certified unhinged 💀</span>
+          <span class="vibe-pill">us 24/7 🫀</span>
+          <span class="vibe-pill">married behavior 💍</span>
+          <span class="vibe-pill">no thoughts just love 🧸</span>
+        </div>
+      </div>
+      <div class="hero__scroll-hint">
+        <span class="scroll-text">📂 open a month to relive it</span>
+        <span class="scroll-arrow">↓</span>
+      </div>
+    </header>
+
+    <!-- VIEWS WRAPPER -->
+    <div id="views-wrapper">
+
+      <!-- MONTH GRID VIEW -->
+      <section id="month-grid-view" class="album-view" aria-label="Memory months">
+        <div class="view-header">
+          <h2 class="view-title">Our Chapters 🐼</h2>
+          <p class="view-sub">pick a month, any month. I promise they're all chaotic and perfect.</p>
+        </div>
+        <div id="month-grid" class="month-grid" role="list"></div>
+      </section>
+
+      <!-- MONTH DETAIL VIEW -->
+      <section id="month-detail-view" class="album-view view--hidden" aria-hidden="true" aria-label="Month memories">
+        <div class="detail-header">
+          <button id="back-btn" class="back-btn">
+            <span class="back-arrow">←</span>
+            <span>All Months</span>
+          </button>
+          <div class="detail-header-text">
+            <h2 id="detail-title" class="detail-title"></h2>
+            <p id="detail-sub" class="detail-sub"></p>
+          </div>
+        </div>
+        <div id="detail-grid" class="detail-grid" role="list"></div>
+      </section>
+
+    </div>
+
+    <!-- CLOSING FOOTER -->
+    <footer class="closing-note" id="closing-note">
+      <div class="closing-note__inner">
+        <div class="closing-panda" aria-hidden="true">🐼</div>
+        <p class="closing-note__script">And so our story grows…</p>
+        <p class="closing-note__body">
+          every random tuesday, every dumb inside joke,<br />
+          every moment where I thought "yeah, it's them" —<br />
+          <em>these are my favourite things in the entire world.</em>
+        </p>
+        <div class="closing-hearts" aria-hidden="true">♡ ♡ ♡</div>
+      </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-label="Memory detail" tabindex="-1">
+      <div class="modal" id="modal">
+        <button class="modal__close" id="modal-close" aria-label="Close">&times;</button>
+        <div class="modal__polaroid">
+          <div class="modal__photo-wrap">
+            <img class="modal__photo" id="modal-photo" src="" alt="" />
+            <div class="modal__photo-shimmer" aria-hidden="true"></div>
+          </div>
+          <div class="modal__info">
+            <p class="modal__date"    id="modal-date"></p>
+            <h2 class="modal__title"  id="modal-title"></h2>
+            <p class="modal__caption" id="modal-caption"></p>
+            <p class="modal__vibe"    id="modal-vibe"></p>
+            <div class="modal__heart-row" aria-hidden="true">
+              <span>♡</span><span>♡</span><span>♡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAB -->
+    <button id="add-memory-btn" class="fab-add" aria-label="Add a new memory" title="Add a new memory">
+      <span class="fab-plus" aria-hidden="true">✦</span>
+      <span class="fab-label">Add a moment</span>
+    </button>
+
+    <!-- ADMIN GATE -->
+    <div id="admin-modal" class="admin-overlay" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading" tabindex="-1">
+      <div class="admin-card">
+        <button class="admin-close" id="admin-close-btn" aria-label="Close">×</button>
+        <div class="admin-icon" aria-hidden="true">🔐</div>
+        <h2 class="admin-heading" id="admin-modal-heading">Memory Vault</h2>
+        <p class="admin-sub">Enter your secret to add a new memory.</p>
+        <input type="password" id="admin-pw" class="admin-pw-input" placeholder="your secret passphrase…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+        <p class="admin-err" id="admin-err" role="alert" aria-live="polite"></p>
+        <button class="admin-unlock-btn" id="admin-unlock-btn">Open Vault ✦</button>
+      </div>
+    </div>
+
+    <!-- ADD MEMORY FORM -->
+    <div id="add-modal" class="add-overlay" role="dialog" aria-modal="true" aria-labelledby="add-modal-heading" tabindex="-1">
+      <div class="add-card">
+        <button class="add-close" id="add-close-btn" aria-label="Close">×</button>
+        <h2 class="add-heading" id="add-modal-heading">📸 New Memory</h2>
+        <p class="add-sub">What beautiful / chaotic / stupid thing happened?</p>
+        <form id="add-form" class="add-form" novalidate>
+          <div class="add-field">
+            <label class="add-label" for="af-date">Date</label>
+            <input type="text" id="af-date" class="add-input" placeholder="e.g. October 25, 2026" autocomplete="off" />
+          </div>
+          <div class="add-field">
+            <label class="add-label" for="af-title">Title</label>
+            <input type="text" id="af-title" class="add-input" placeholder="e.g. we got lost again 💀" autocomplete="off" />
+          </div>
+          <div class="add-field">
+            <label class="add-label" for="af-vibe">Vibe <span class="add-label-opt">(optional fun tag)</span></label>
+            <input type="text" id="af-vibe" class="add-input" placeholder="e.g. certified unhinged 🐼" autocomplete="off" />
+          </div>
+          <div class="add-field">
+            <label class="add-label" for="af-photo">Photo URL <span class="add-label-opt">(optional)</span></label>
+            <input type="url" id="af-photo" class="add-input" placeholder="https://… (direct image link)" autocomplete="off" />
+            <div class="add-preview" id="af-preview">
+              <img id="af-preview-img" src="" alt="Photo preview" />
+              <p class="add-preview-empty" aria-hidden="true">Preview will appear here</p>
+            </div>
+          </div>
+          <div class="add-field">
+            <label class="add-label" for="af-caption">Caption</label>
+            <textarea id="af-caption" class="add-textarea" rows="4" placeholder="Tell the story. Be goofy. Be tender. Both at once."></textarea>
+          </div>
+          <p class="add-err" id="add-err" role="alert" aria-live="polite"></p>
+          <div class="add-actions">
+            <button type="button" class="add-cancel-btn" id="add-cancel-btn">Cancel</button>
+            <button type="submit" class="add-save-btn">Save Memory 💛</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="memory-toast" id="memory-toast" aria-live="polite" aria-atomic="true"></div>
+
+  </div><!-- /#main-site -->
+
+  <script src="script.js"></script>
+</body>
+</html>
