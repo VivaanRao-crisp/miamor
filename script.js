@@ -12,29 +12,29 @@
    ╚══════════════════════════════════════════════════════════════════╝ */
 
 const TERMINAL_CONFIG = {
-  password: 'iloveyou',
-  hint: 'Three words. Eight letters. What I tell you every single day. 🌿',
+  password: '141025',
+  hint: 'the day',
 };
 
 const ADD_CONFIG = {
-  password: 'addmemory',
+  password: 'mybaby',
 };
 
 /* ── Boot sequence lines ── */
 const BOOT_LINES = [
-  { text: 'MIAMOR OS  v1.0.0  [BUILD 20240101]', cls: 'term-bold',   delay: 0   },
-  { text: 'Memory Archive & Emotional Backup System',cls:'term-dim', delay: 180 },
-  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─',cls:'term-sep', delay:280},
-  { text: '[ OK ]  Initializing memory sectors...',  cls:'term-ok',  delay: 400 },
-  { text: '[ OK ]  Loading love_archive.tar.gz...',  cls:'term-ok',  delay: 650 },
-  { text: '[ OK ]  Decrypting emotional_backup.db...',cls:'term-ok', delay: 900 },
-  { text: '[ OK ]  Bypassing rational_thought.exe...',cls:'term-ok', delay:1150 },
-  { text: '[ OK ]  Calibrating heartbeat_monitor.sh...',cls:'term-ok',delay:1400},
-  { text: '[ OK ]  Running pasandida_protocol.sh...',cls:'term-ok',  delay:1650 },
-  { text: '[ OK ]  Mounting /home/meri_jaan/...',    cls:'term-ok',  delay:1900 },
-  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─',cls:'term-sep',delay:2100},
-  { text: 'All systems nominal. Standing by.',       cls:'term-bold', delay:2300 },
-  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─',cls:'term-sep',delay:2500},
+  { text: 'MIAMOR OS  v1.0.0  [BUILD 20240101]', cls: 'term-bold', delay: 0 },
+  { text: 'Memory Archive & Emotional Backup System', cls: 'term-dim', delay: 180 },
+  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─', cls: 'term-sep', delay: 280 },
+  { text: '[ OK ]  Initializing memory sectors...', cls: 'term-ok', delay: 400 },
+  { text: '[ OK ]  Loading love_archive.tar.gz...', cls: 'term-ok', delay: 650 },
+  { text: '[ OK ]  Decrypting emotional_backup.db...', cls: 'term-ok', delay: 900 },
+  { text: '[ OK ]  Bypassing rational_thought.exe...', cls: 'term-ok', delay: 1150 },
+  { text: '[ OK ]  Calibrating heartbeat_monitor.sh...', cls: 'term-ok', delay: 1400 },
+  { text: '[ OK ]  Running pasandida_protocol.sh...', cls: 'term-ok', delay: 1650 },
+  { text: '[ OK ]  Mounting /home/meri_jaan/...', cls: 'term-ok', delay: 1900 },
+  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─', cls: 'term-sep', delay: 2100 },
+  { text: 'All systems nominal. Standing by.', cls: 'term-bold', delay: 2300 },
+  { text: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─', cls: 'term-sep', delay: 2500 },
 ];
 
 const WRONG_MESSAGES = [
@@ -47,13 +47,13 @@ const WRONG_MESSAGES = [
 
 /* ── Terminal state ── */
 const termState = {
-  phase:       'booting',   // 'booting' | 'password'
+  phase: 'booting',   // 'booting' | 'password'
   inputBuffer: '',
-  wrongCount:  0,
-  overlay:     null,
-  output:      null,
-  display:     null,
-  cursor:      null,
+  wrongCount: 0,
+  overlay: null,
+  output: null,
+  display: null,
+  cursor: null,
   hiddenInput: null,
 };
 
@@ -107,9 +107,9 @@ function showPasswordPrompt() {
   termState.phase = 'password';
 
   printBox([
-    { text: '  RESTRICTED ACCESS PORTAL',   cls: 'term-bold' },
+    { text: '  RESTRICTED ACCESS PORTAL', cls: 'term-bold' },
     { text: '  This system is for authorized eyes only.', cls: 'term-box-line' },
-    { text: '  You know exactly who you are.  ♥',        cls: 'term-pink' },
+    { text: '  You know exactly who you are.  ♥', cls: 'term-pink' },
   ]);
 
   const hintNote = document.createElement('span');
@@ -199,29 +199,34 @@ async function handleSuccess() {
 
 /* ── Init terminal ── */
 function initTerminal() {
-  termState.overlay     = document.getElementById('terminal-overlay');
-  termState.output      = document.getElementById('terminal-output');
-  termState.display     = document.getElementById('term-display');
-  termState.cursor      = document.getElementById('term-cursor');
+  termState.overlay = document.getElementById('terminal-overlay');
+  termState.output = document.getElementById('terminal-output');
+  termState.display = document.getElementById('term-display');
+  termState.cursor = document.getElementById('term-cursor');
   termState.hiddenInput = document.getElementById('term-hidden-input');
 
   /* Desktop: keyboard on document */
   document.addEventListener('keydown', e => {
     if (termState.phase !== 'password') return;
-    if (['Tab','Escape','F1','F2','F3','F4','F5'].includes(e.key)) return;
+    // Skip if the hidden input itself fired this (mobile path handles it)
+    if (document.activeElement === termState.hiddenInput) return;
+    if (['Tab', 'Escape', 'F1', 'F2', 'F3', 'F4', 'F5'].includes(e.key)) return;
     if (e.ctrlKey || e.metaKey) return;
     e.preventDefault();
     processInput(e.key);
   });
 
-  /* Mobile: hidden input */
+  /* Mobile: hidden input captures typed characters */
   termState.hiddenInput.addEventListener('input', function () {
-    this.value.split('').forEach(ch => processInput(ch));
+    const chars = this.value;
     this.value = '';
+    for (const ch of chars) {
+      if (ch !== '\n' && ch !== '\r') processInput(ch);
+    }
   });
   termState.hiddenInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') processInput('Enter');
-    if (e.key === 'Backspace') processInput('Backspace');
+    if (e.key === 'Enter') { e.preventDefault(); processInput('Enter'); }
+    if (e.key === 'Backspace') { e.preventDefault(); processInput('Backspace'); }
   });
 
   /* Tap to focus on mobile */
@@ -347,7 +352,7 @@ const memories = [
     title: 'Always & Forever 💛',
     photoUrl: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&q=80',
     caption: 'every single ordinary day with you. the texts, the voice notes, the 1am conversations, the dumb jokes nobody else gets. i am so lucky it\'s actually unreal. you are my whole world.',
-    vibe: 'genuinely obsessed 🐼',
+    vibe: 'genuinely obsessed 🐱',
   },
 ];
 
@@ -364,18 +369,18 @@ const MONTH_PALETTE = [
 ];
 
 const MONTH_EMOJIS = {
-  '01':'❄️','02':'💕','03':'🌸','04':'🌷',
-  '05':'🌻','06':'🌊','07':'🍦','08':'🎆',
-  '09':'🍁','10':'🎃','11':'🍂','12':'✨',
+  '01': '❄️', '02': '💕', '03': '🌸', '04': '🌷',
+  '05': '🌻', '06': '🌊', '07': '🍦', '08': '🎆',
+  '09': '🍁', '10': '🎃', '11': '🍂', '12': '✨',
 };
 
 /* ── M-3: Utility functions ── */
 function escapeHTML(str) {
   return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 function formatMonthKey(key) {
@@ -410,20 +415,20 @@ let currentDetailKey = null;
 
 /* ── M-5: Render month grid ── */
 function renderMonthGrid() {
-  const custom   = loadCustomMemories();
-  const all      = [...memories, ...custom];
-  const groups   = groupByMonth(all);
-  const grid     = document.getElementById('month-grid');
+  const custom = loadCustomMemories();
+  const all = [...memories, ...custom];
+  const groups = groupByMonth(all);
+  const grid = document.getElementById('month-grid');
   grid.innerHTML = '';
 
   if (groups.length === 0) {
-    grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-style:italic;">No memories yet. Add your first one! 🐼</p>';
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-style:italic;">No memories yet. Add your first one! 🐱</p>';
     return;
   }
 
   groups.forEach(({ key, mems }, i) => {
     const palette = getPalette(i);
-    const card    = buildMonthCard(key, mems, palette, i);
+    const card = buildMonthCard(key, mems, palette, i);
     grid.appendChild(card);
   });
 }
@@ -443,11 +448,11 @@ function buildMonthCard(key, mems, palette, paletteIdx) {
 
   /* Photo thumbnails (up to 4) */
   const photos = mems.filter(m => m.photoUrl).slice(0, 4);
-  const cnt    = Math.min(photos.length, 4);
+  const cnt = Math.min(photos.length, 4);
 
   let photosHTML = '';
   photos.forEach((m, idx) => {
-    const isLast   = idx === 3 && mems.filter(x => x.photoUrl).length > 4;
+    const isLast = idx === 3 && mems.filter(x => x.photoUrl).length > 4;
     const extraCnt = mems.filter(x => x.photoUrl).length - 4;
     const extraHTML = isLast
       ? `<div class="month-thumb-extra">+${extraCnt}</div>`
@@ -462,7 +467,7 @@ function buildMonthCard(key, mems, palette, paletteIdx) {
 
   /* Vibe from first memory that has one */
   const vibeSource = mems.find(m => m.vibe);
-  const vibeText   = vibeSource ? vibeSource.vibe : `${mems.length} moment${mems.length !== 1 ? 's' : ''} ♡`;
+  const vibeText = vibeSource ? vibeSource.vibe : `${mems.length} moment${mems.length !== 1 ? 's' : ''} ♡`;
 
   card.innerHTML = `
     <div class="month-card-photos ${photoClass}">
@@ -493,10 +498,10 @@ function showMonthDetail(key, mems, palette) {
   const emoji = getMonthEmoji(key);
   document.getElementById('detail-title').textContent = `${emoji} ${formatMonthKey(key)}`;
   document.getElementById('detail-sub').textContent =
-    `${mems.length} ${mems.length === 1 ? 'memory' : 'memories'} saved 🐼`;
+    `${mems.length} ${mems.length === 1 ? 'memory' : 'memories'} saved 🐱`;
 
   /* Build memory cards */
-  const grid    = document.getElementById('detail-grid');
+  const grid = document.getElementById('detail-grid');
   grid.innerHTML = '';
   mems.forEach(m => {
     const card = buildDetailCard(m, palette);
@@ -504,7 +509,7 @@ function showMonthDetail(key, mems, palette) {
   });
 
   /* Transition */
-  const gridView   = document.getElementById('month-grid-view');
+  const gridView = document.getElementById('month-grid-view');
   const detailView = document.getElementById('month-detail-view');
 
   gridView.classList.add('view--hidden');
@@ -512,7 +517,7 @@ function showMonthDetail(key, mems, palette) {
   detailView.classList.remove('view--hidden');
   detailView.style.position = 'relative';
   detailView.style.transform = '';
-  detailView.style.opacity   = '';
+  detailView.style.opacity = '';
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -520,7 +525,7 @@ function showMonthDetail(key, mems, palette) {
 function backToGrid() {
   currentDetailKey = null;
 
-  const gridView   = document.getElementById('month-grid-view');
+  const gridView = document.getElementById('month-grid-view');
   const detailView = document.getElementById('month-detail-view');
 
   detailView.classList.add('view--hidden');
@@ -575,12 +580,12 @@ function buildDetailCard(memory, palette) {
 
 /* ── M-8: Lightbox modal ── */
 function openModal(memory) {
-  const overlay  = document.getElementById('modal-overlay');
-  const photo    = document.getElementById('modal-photo');
-  const dateEl   = document.getElementById('modal-date');
-  const titleEl  = document.getElementById('modal-title');
-  const captEl   = document.getElementById('modal-caption');
-  const vibeEl   = document.getElementById('modal-vibe');
+  const overlay = document.getElementById('modal-overlay');
+  const photo = document.getElementById('modal-photo');
+  const dateEl = document.getElementById('modal-date');
+  const titleEl = document.getElementById('modal-title');
+  const captEl = document.getElementById('modal-caption');
+  const vibeEl = document.getElementById('modal-vibe');
 
   const photoWrap = document.querySelector('.modal__photo-wrap');
 
@@ -592,10 +597,10 @@ function openModal(memory) {
     photoWrap.style.display = 'none';
   }
 
-  dateEl.textContent  = memory.date;
+  dateEl.textContent = memory.date;
   titleEl.textContent = memory.title;
-  captEl.textContent  = memory.caption;
-  vibeEl.textContent  = memory.vibe || '';
+  captEl.textContent = memory.caption;
+  vibeEl.textContent = memory.vibe || '';
 
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -610,17 +615,17 @@ function closeModal() {
 /* ── M-9: Floating petals ── */
 function createPetals() {
   const container = document.getElementById('petals-container');
-  const petals    = ['🌸','🌺','🌷','🍀','🌿','✿','♡','🌼'];
+  const petals = ['🌸', '🌺', '🌷', '🍀', '🌿', '✿', '♡', '🌼'];
 
   for (let i = 0; i < 18; i++) {
     const p = document.createElement('span');
-    p.className   = 'petal';
+    p.className = 'petal';
     p.textContent = petals[Math.floor(Math.random() * petals.length)];
-    p.style.left  = Math.random() * 100 + 'vw';
-    p.style.animationDuration  = (12 + Math.random() * 16) + 's';
-    p.style.animationDelay     = (Math.random() * 20) + 's';
-    p.style.fontSize           = (0.7 + Math.random() * 0.6) + 'rem';
-    p.style.opacity            = (0.3 + Math.random() * 0.4).toString();
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (12 + Math.random() * 16) + 's';
+    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.fontSize = (0.7 + Math.random() * 0.6) + 'rem';
+    p.style.opacity = (0.3 + Math.random() * 0.4).toString();
     container.appendChild(p);
   }
 }
@@ -637,8 +642,8 @@ function initMainSite() {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       closeModal();
-      if (document.getElementById('add-modal').classList.contains('active'))   closeAddModal();
-      if (document.getElementById('admin-modal').classList.contains('active')) closeAdminModal();
+      if (document.getElementById('add-modal').open) closeAddModal();
+      if (document.getElementById('admin-modal').open) closeAdminModal();
     }
   });
 
@@ -677,15 +682,13 @@ function saveCustomMemories(arr) {
 function parseDateToMonthKey(dateStr) {
   if (!dateStr) return currentMonthKey();
 
-  // Try native parse
   const d = new Date(dateStr);
   if (!isNaN(d.getTime())) {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
   }
 
-  // Manual parse: look for month name + year
   const months = ['january','february','march','april','may','june','july','august','september','october','november','december'];
-  const lower  = dateStr.toLowerCase();
+  const lower = dateStr.toLowerCase();
   let mi = -1;
   months.forEach((name, i) => { if (lower.includes(name)) mi = i; });
   const yearM = dateStr.match(/\b(20\d{2})\b/);
@@ -704,31 +707,38 @@ function currentMonthKey() {
 /* ── Admin gate ── */
 let adminSessionUnlocked = false;
 
+const adminDialog = () => document.getElementById('admin-modal');
+const addDialog   = () => document.getElementById('add-modal');
+
 function openAdminModal() {
-  if (adminSessionUnlocked) { openAddModal(); return; }
-  const overlay = document.getElementById('admin-modal');
-  overlay.classList.add('active');
-  overlay.removeAttribute('aria-hidden');
-  document.body.style.overflow = 'hidden';
+  if (adminSessionUnlocked) {
+    openAddModal();
+    return;
+  }
+  const dlg = adminDialog();
   document.getElementById('admin-pw').value = '';
   document.getElementById('admin-err').textContent = '';
+  dlg.showModal();
   document.getElementById('admin-pw').focus();
 }
 
 function closeAdminModal() {
-  document.getElementById('admin-modal').classList.remove('active');
-  document.getElementById('admin-modal').setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+  const dlg = adminDialog();
+  if (dlg.open) dlg.close();
 }
 
 function checkAdminPassword() {
+  const dlg = adminDialog();
+  if (!dlg.open) return;
+
   const val = document.getElementById('admin-pw').value;
+
   if (val === ADD_CONFIG.password) {
     adminSessionUnlocked = true;
     closeAdminModal();
     openAddModal();
   } else {
-    document.getElementById('admin-err').textContent = 'Hmm, that\'s not quite right. Try again. 🌿';
+    document.getElementById('admin-err').textContent = "Hmm, that's not right. Try again. 🌿";
     document.getElementById('admin-pw').value = '';
     document.getElementById('admin-pw').focus();
     const card = document.querySelector('.admin-card');
@@ -739,21 +749,18 @@ function checkAdminPassword() {
 
 /* ── Add memory form ── */
 function openAddModal() {
-  document.getElementById('add-modal').classList.add('active');
-  document.getElementById('add-modal').removeAttribute('aria-hidden');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('add-err').textContent = '';
-  document.getElementById('af-date').focus();
-}
-
-function closeAddModal() {
-  document.getElementById('add-modal').classList.remove('active');
-  document.getElementById('add-modal').setAttribute('aria-hidden', 'true');
+  const dlg = addDialog();
   document.getElementById('add-form').reset();
   document.getElementById('add-err').textContent = '';
   document.getElementById('af-preview').classList.remove('has-image');
   document.getElementById('af-preview-img').src = '';
-  document.body.style.overflow = '';
+  dlg.showModal();
+  document.getElementById('af-date').focus();
+}
+
+function closeAddModal() {
+  const dlg = addDialog();
+  if (dlg.open) dlg.close();
 }
 
 function handleAddMemorySubmit(e) {
@@ -789,13 +796,7 @@ function handleAddMemorySubmit(e) {
 
   closeAddModal();
 
-  /* Re-render grid; if in detail for same month, go back to grid first */
-  if (currentDetailKey === monthKey) {
-    backToGrid();
-  } else if (currentDetailKey) {
-    backToGrid();
-  }
-
+  if (currentDetailKey) backToGrid();
   renderMonthGrid();
   showToast('Memory saved! 💛 It\'s in your album now.');
 }
@@ -826,25 +827,33 @@ function showToast(msg) {
 
 /* ── Wire everything up ── */
 function initAddMemorySystem() {
+  /* FAB */
   document.getElementById('add-memory-btn').addEventListener('click', openAdminModal);
 
+  /* Admin dialog */
   document.getElementById('admin-unlock-btn').addEventListener('click', checkAdminPassword);
   document.getElementById('admin-pw').addEventListener('keydown', e => {
-    if (e.key === 'Enter') checkAdminPassword();
+    if (e.key === 'Enter') { e.preventDefault(); checkAdminPassword(); }
   });
   document.getElementById('admin-close-btn').addEventListener('click', closeAdminModal);
-  document.getElementById('admin-modal').addEventListener('click', e => {
-    if (e.target.id === 'admin-modal') closeAdminModal();
+  // Close on backdrop click
+  adminDialog().addEventListener('click', e => {
+    if (e.target === adminDialog()) closeAdminModal();
   });
 
+  /* Add memory dialog */
   document.getElementById('add-close-btn').addEventListener('click', closeAddModal);
   document.getElementById('add-cancel-btn').addEventListener('click', closeAddModal);
-  document.getElementById('add-modal').addEventListener('click', e => {
-    if (e.target.id === 'add-modal') closeAddModal();
+  // Close on backdrop click
+  addDialog().addEventListener('click', e => {
+    if (e.target === addDialog()) closeAddModal();
   });
   document.getElementById('add-form').addEventListener('submit', handleAddMemorySubmit);
 
+  /* Photo preview */
   document.getElementById('af-photo').addEventListener('input', function () {
     updatePhotoPreview(this.value.trim());
   });
 }
+
+

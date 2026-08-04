@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Memory Album 🐼 — Every Stupid Beautiful Thing</title>
+  <title>Our Memory Album 🐱 — Every Stupid Beautiful Thing</title>
   <meta name="description" content="A goofy, lovey, chaotic little album of every dumb beautiful moment we've shared." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Dancing+Script:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -42,8 +42,8 @@
         <span class="sparkle s6">✦</span>
       </div>
       <div class="hero__panda-deco" aria-hidden="true">
-        <span class="deco-panda dp1">🐼</span>
-        <span class="deco-panda dp2">🐼</span>
+        <span class="deco-panda dp1">🐱</span>
+        <span class="deco-panda dp2">🐱</span>
         <span class="deco-panda dp3">🌸</span>
         <span class="deco-panda dp4">🌿</span>
       </div>
@@ -73,7 +73,7 @@
       <!-- MONTH GRID VIEW -->
       <section id="month-grid-view" class="album-view" aria-label="Memory months">
         <div class="view-header">
-          <h2 class="view-title">Our Chapters 🐼</h2>
+          <h2 class="view-title">Our Chapters 🐱</h2>
           <p class="view-sub">pick a month, any month. I promise they're all chaotic and perfect.</p>
         </div>
         <div id="month-grid" class="month-grid" role="list"></div>
@@ -99,7 +99,7 @@
     <!-- CLOSING FOOTER -->
     <footer class="closing-note" id="closing-note">
       <div class="closing-note__inner">
-        <div class="closing-panda" aria-hidden="true">🐼</div>
+        <div class="closing-panda" aria-hidden="true">🐱</div>
         <p class="closing-note__script">And so our story grows…</p>
         <p class="closing-note__body">
           every random tuesday, every dumb inside joke,<br />
@@ -139,7 +139,7 @@
     </button>
 
     <!-- ADMIN GATE -->
-    <div id="admin-modal" class="admin-overlay" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading" tabindex="-1">
+    <dialog id="admin-modal" class="admin-dialog" aria-labelledby="admin-modal-heading">
       <div class="admin-card">
         <button class="admin-close" id="admin-close-btn" aria-label="Close">×</button>
         <div class="admin-icon" aria-hidden="true">🔐</div>
@@ -147,14 +147,14 @@
         <p class="admin-sub">Enter your secret to add a new memory.</p>
         <input type="password" id="admin-pw" class="admin-pw-input" placeholder="your secret passphrase…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
         <p class="admin-err" id="admin-err" role="alert" aria-live="polite"></p>
-        <button class="admin-unlock-btn" id="admin-unlock-btn">Open Vault ✦</button>
+        <button class="admin-unlock-btn" id="admin-unlock-btn" type="button">Open Vault ✦</button>
       </div>
-    </div>
+    </dialog>
 
     <!-- ADD MEMORY FORM -->
-    <div id="add-modal" class="add-overlay" role="dialog" aria-modal="true" aria-labelledby="add-modal-heading" tabindex="-1">
+    <dialog id="add-modal" class="add-dialog" aria-labelledby="add-modal-heading">
       <div class="add-card">
-        <button class="add-close" id="add-close-btn" aria-label="Close">×</button>
+        <button class="add-close" id="add-close-btn" aria-label="Close" type="button">×</button>
         <h2 class="add-heading" id="add-modal-heading">📸 New Memory</h2>
         <p class="add-sub">What beautiful / chaotic / stupid thing happened?</p>
         <form id="add-form" class="add-form" novalidate>
@@ -168,7 +168,7 @@
           </div>
           <div class="add-field">
             <label class="add-label" for="af-vibe">Vibe <span class="add-label-opt">(optional fun tag)</span></label>
-            <input type="text" id="af-vibe" class="add-input" placeholder="e.g. certified unhinged 🐼" autocomplete="off" />
+            <input type="text" id="af-vibe" class="add-input" placeholder="e.g. certified unhinged 🐱" autocomplete="off" />
           </div>
           <div class="add-field">
             <label class="add-label" for="af-photo">Photo URL <span class="add-label-opt">(optional)</span></label>
@@ -189,7 +189,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </dialog>
 
     <!-- TOAST -->
     <div class="memory-toast" id="memory-toast" aria-live="polite" aria-atomic="true"></div>
